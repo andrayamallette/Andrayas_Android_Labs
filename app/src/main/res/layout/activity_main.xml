@@ -29,15 +29,15 @@
            android:layout_height="wrap_content"
            android:text="I\'m a CheckBox">
        </CheckBox>
-    <!-- this one causes the program to crash
-           <SwitchCompat
+    <!-- don't use a switchcompat-->
+           <Switch
                android:id="@+id/mysc"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:text="I\' a SwitchCompat">
+               android:text="I\' a Switch">
 
-           </SwitchCompat>
--->
+           </Switch>
+
        <RadioButton
            android:id="@+id/myradio"
            android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
     <ImageView
         android:id="@+id/logoalgonquin"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:src="@drawable/logoalgonquin">
     </ImageView>
     <ImageButton
