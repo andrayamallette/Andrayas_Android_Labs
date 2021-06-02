@@ -1,67 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <TextView
-        android:id="@+id/textview"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_message"
-        />
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/mybutton"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:text="@string/button_message"
-        />
+        android:layout_marginStart="32dp"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
 
-       <CheckBox
-           android:id="@+id/mycb"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="I\'m a CheckBox">
-       </CheckBox>
-    <!-- don't use a switchcompat-->
-           <Switch
-               android:id="@+id/mysc"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="I\' a Switch">
-
-           </Switch>
-
-       <RadioButton
-           android:id="@+id/myradio"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="I\'m a radio button">
-       </RadioButton>
-
-
-       <EditText
-           android:id="@+id/myedittext"
-           android:layout_height="wrap_content"
-           android:layout_width="wrap_content"
-           android:text="I\'m an Edit Text"
-           />
-    <ImageView
-        android:id="@+id/logoalgonquin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logoalgonquin">
-    </ImageView>
-    <ImageButton
-        android:src="@drawable/logoalgonquin"
+    <Button
+        android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/myimagebutton"/>
-
-</LinearLayout>
+        android:layout_marginStart="32dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="@+id/button2" />
+</androidx.constraintlayout.widget.ConstraintLayout>
