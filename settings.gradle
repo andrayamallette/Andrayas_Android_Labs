@@ -1,2 +1,5 @@
 rootProject.name = "Andraya's Android Labs"
 include ':app'
+include ':myapplication'
+include ':week3_tv'
+include ':week3_tv2'
