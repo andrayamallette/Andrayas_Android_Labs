@@ -35,7 +35,7 @@ public class ChatRoom extends AppCompatActivity {
         EditText edit = findViewById(R.id.edittext);
 
         chatList = findViewById(R.id.myrecycler);
-        setContentView(R.layout.chatlayout);
+       // setContentView(R.layout.chatlayout);
 
         adt = new MyChatAdapter();
         chatList.setAdapter( adt );
@@ -84,7 +84,7 @@ public class ChatRoom extends AppCompatActivity {
                     Snackbar.make(messageText, "You deleted message #"+position, Snackbar.LENGTH_LONG)
                             .setAction("Undo", clk->{
                                 messages.add(position, removedMessage);
-
+                                adt.notifyItemInserted(position); //redraw the inserted item
                             })
                             .show();
                     });
@@ -94,11 +94,7 @@ public class ChatRoom extends AppCompatActivity {
             messageText = itemView.findViewById(R.id.message);
             timeText=itemView.findViewById(R.id.time);
         }
-        public MyRowViews onCreateViewHolder(ViewGroup parent, int viewType){
-            LayoutInflater inflater = getLayoutInflater();
-            View loadedRow = inflater.inflate(R.layout.sent_message, parent, false);
-            return new MyRowViews(loadedRow);
-        }
+
     }
     private class MyChatAdapter extends RecyclerView.Adapter<MyRowViews>{
 
@@ -112,13 +108,18 @@ public class ChatRoom extends AppCompatActivity {
             else
                 layoutID=R.layout.receive_message;
             View loadedRow=inflater.inflate(layoutID, parent, false);
-            return null;
+            return new MyRowViews(loadedRow);
         }
         @Override
         public void onBindViewHolder(MyRowViews holder, int position) {
             holder.messageText.setText(messages.get(position).getMessage());
             holder.timeText.setText(messages.get(position).getTimeSent());
             //holder.setPosition(position); for some reason this one doesn't work
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            return messages.get(position).getSendOrRecieve();
         }
 
         @Override
