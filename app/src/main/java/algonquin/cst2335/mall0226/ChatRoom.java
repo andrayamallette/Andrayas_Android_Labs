@@ -34,6 +34,7 @@ public class ChatRoom extends AppCompatActivity {
         Button receive = findViewById(R.id.recievebtn);
         EditText edit = findViewById(R.id.edittext);
 
+        MyOpenHelper opener = new MyOpenHelper();
         chatList = findViewById(R.id.myrecycler);
        // setContentView(R.layout.chatlayout);
 
