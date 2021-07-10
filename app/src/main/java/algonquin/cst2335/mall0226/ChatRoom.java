@@ -28,6 +28,10 @@ public class ChatRoom extends AppCompatActivity {
     ArrayList<ChatMessage> messages = new ArrayList<>();
     RecyclerView chatList;
     MyChatAdapter adt;
+    MyOpenHelper opener;
+    SQLiteDatabase db;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +41,8 @@ public class ChatRoom extends AppCompatActivity {
         Button receive = findViewById(R.id.recievebtn);
         EditText edit = findViewById(R.id.edittext);
 
-        MyOpenHelper opener = new MyOpenHelper(this);
-        SQLiteDatabase db = opener.getWritableDatabase();
+        opener = new MyOpenHelper(this);
+        db = opener.getWritableDatabase();
 
         chatList = findViewById(R.id.myrecycler);
        // setContentView(R.layout.chatlayout);
@@ -117,11 +121,17 @@ public class ChatRoom extends AppCompatActivity {
 
                     ChatMessage removedMessage = messages.get(position);
                     messages.remove(position);
+
+                    db.delete(MyOpenHelper.TABLE_NAME, "_id=?", new String[] {Long.toString(removedMessage.getId())});
                     adt.notifyItemRemoved(position);
 
                     Snackbar.make(messageText, "You deleted message #"+position, Snackbar.LENGTH_LONG)
                             .setAction("Undo", clk->{
                                 messages.add(position, removedMessage);
+                                db.execSQL("Insert into "+MyOpenHelper.TABLE_NAME + " values('"+removedMessage.getId()+
+                                                "', '" + removedMessage.getMessage() +
+                                                "', '" + removedMessage.getSendOrRecieve() +
+                                                "', '" + removedMessage.getTimeSent()+ "');");
                                 adt.notifyItemInserted(position); //redraw the inserted item
                             })
                             .show();
