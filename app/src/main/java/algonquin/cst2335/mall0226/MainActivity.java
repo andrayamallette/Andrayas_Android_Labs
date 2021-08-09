@@ -3,11 +3,15 @@ package algonquin.cst2335.mall0226;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Activity;
 import android.app.AlertDialog;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -16,6 +20,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -28,7 +33,7 @@ import java.util.concurrent.Executors;
  * @version 1.0
  */
 public class MainActivity extends AppCompatActivity {
-
+    Bitmap image;
     String description = null;
     String iconName = null;
     String current = null;
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                     }
+                    image = assignImage(iconName);
 
                     runOnUiThread(()->{
                         TextView tv = findViewById(R.id.temp);
@@ -122,9 +128,9 @@ public class MainActivity extends AppCompatActivity {
                         dialog.hide();
 
 
-                        /*ImageView iv = findViewById(R.id.icon);
-                        iv.setImageBitmap(assignImage(iconName));
-                        iv.setVisibility(View.VISIBLE);*/
+                        ImageView iv = findViewById(R.id.icon);
+                        iv.setImageBitmap(image);
+                        iv.setVisibility(View.VISIBLE);
                     });
 
 
@@ -137,17 +143,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*
+
     private Bitmap assignImage(String iconName) {
-        Bitmap image = null;
+
         try{
 
             File file = new File(getFilesDir(), iconName +".png");
             if(file.exists()){
-                image=BitmapFactory.decodeFile(getFilesDir()+"/"+".png");//file cannot be found
+                image=BitmapFactory.decodeFile(getFilesDir()+"/"+iconName+".png");//file cannot be found
                 return image;
             }else{
-                URL imgUrl = new URL( "https://openweathermap.org/img/w/"+ iconName +".png" );
+                java.net.URL imgUrl = new URL( "https://openweathermap.org/img/w/"+ iconName +".png" );
                 HttpURLConnection connection = (HttpURLConnection) imgUrl.openConnection();
                 connection.connect();//fails here android.os.NetworkOnMainThreadException
                 int responseCode = connection.getResponseCode();
@@ -164,6 +170,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return image;
     }
-     */
+
 
 }
