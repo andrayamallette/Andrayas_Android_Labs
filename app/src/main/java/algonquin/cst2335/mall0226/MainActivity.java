@@ -2,8 +2,11 @@ package algonquin.cst2335.mall0226;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import android.app.Activity;
@@ -21,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -60,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String stringURL;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +82,17 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar=findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, myToolbar, R.string.open, R.string.close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.popoutmenu);
+        navigationView.setNavigationItemSelectedListener((item)-> {
+            onOptionsItemSelected(item);
+            drawer.closeDrawer(GravityCompat.START);
+            return false;
+        });
 
 
 
@@ -89,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
     public void runForecast(String cityName){
         AlertDialog dialog = new AlertDialog.Builder(MainActivity.this)
                 .setTitle("Getting forecase")
@@ -179,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected( MenuItem item) {
         float oldSize=14;
 
         switch(item.getItemId()){
