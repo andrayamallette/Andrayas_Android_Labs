@@ -6,10 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
         android:text="Type in the name of a city"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cityTextField" />
 
     <TextView
-        android:id="@+id/temp"
+        android:id="@+id/currentTemp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Temp goes here"
@@ -55,7 +63,7 @@
         android:layout_height="wrap_content"
         android:text="Min goes here"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/temp"
+        app:layout_constraintTop_toBottomOf="@+id/currentTemp"
         tools:layout_editor_absoluteX="-8dp" />
 
     <TextView
